@@ -1,0 +1,14 @@
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\bin\Debug\netcoreapp2.1\Kwikemart_API.deps.json
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\bin\Debug\netcoreapp2.1\Kwikemart_API.runtimeconfig.json
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\bin\Debug\netcoreapp2.1\Kwikemart_API.runtimeconfig.dev.json
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\bin\Debug\netcoreapp2.1\Kwikemart_API.dll
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\obj\Debug\netcoreapp2.1\Kwikemart_API.csprojAssemblyReference.cache
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\obj\Debug\netcoreapp2.1\Kwikemart_API.csproj.CoreCompileInputs.cache
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\obj\Debug\netcoreapp2.1\Kwikemart_API.RazorAssemblyInfo.cache
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\obj\Debug\netcoreapp2.1\Kwikemart_API.RazorAssemblyInfo.cs
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\obj\Debug\netcoreapp2.1\Kwikemart_API.AssemblyInfoInputs.cache
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\obj\Debug\netcoreapp2.1\Kwikemart_API.AssemblyInfo.cs
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\obj\Debug\netcoreapp2.1\Kwikemart_API.RazorTargetAssemblyInfo.cache
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\bin\Debug\netcoreapp2.1\Kwikemart_API.pdb
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\obj\Debug\netcoreapp2.1\Kwikemart_API.dll
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_API\Kwikemart_API\obj\Debug\netcoreapp2.1\Kwikemart_API.pdb
