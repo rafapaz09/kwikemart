@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Kwikemart_API.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -49,6 +50,10 @@ namespace Kwikemart_API
                 c.SwaggerDoc(version, new Info { Title = apiName, Version = version });
             });
 
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ActionFilter));
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
