@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Kwikemart_API.Models;
 using Kwikemart_API.Services;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace Kwikemart_API.Controllers
 {
@@ -31,7 +32,12 @@ namespace Kwikemart_API.Controllers
         {
             try
             {
-                return Ok(await _productService.GetProductsAsync());
+                Dictionary<string, string> Filters = new Dictionary<string, string>();
+
+                var nvc = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+                Filters = nvc.AllKeys.ToDictionary(k => k, k => nvc[k]);
+
+                return Ok(await _productService.GetProductsAsync(Filters));
             }
             catch(Exception ex)
             {

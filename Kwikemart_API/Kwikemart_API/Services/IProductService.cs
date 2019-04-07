@@ -12,7 +12,7 @@ namespace Kwikemart_API.Services
         SqlConnection con { get; set; }
 
         //Get All the available Products
-        Task<object> GetProductsAsync();
+        Task<object> GetProductsAsync(Dictionary<string, string> Filters);
 
         //Modifying a product or adding new one
         Task SetProductAsync(object Product, string action);

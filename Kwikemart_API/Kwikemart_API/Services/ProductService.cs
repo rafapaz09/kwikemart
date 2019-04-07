@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using System.Data;
 using System.Data.SqlClient;
-using Kwikemart_API.Models;
+using System.Collections.Generic;
 
 namespace Kwikemart_API.Services
 {
@@ -13,12 +11,14 @@ namespace Kwikemart_API.Services
     {
 
         public SqlConnection con { get; set; }
+        public string sort { get; set; }
 
         public ProductService()
         {
             try
             {
                 con = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=Kwikemart;Integrated Security=true");
+                sort = "Name ASC";
             }
             catch (Exception ex)
             {
@@ -26,21 +26,41 @@ namespace Kwikemart_API.Services
             }
         }
 
-        public async Task<object> GetProductsAsync()
+        public async Task<object> GetProductsAsync(Dictionary<string,string> Filters)
         {
             try
             {
                 object result = null;
+                var parameters = new DynamicParameters();
                 using (IDbConnection db = con)
                 {
-                    string query = 
-                        "SELECT  p.ProductId," +
-                        "        p.ProductDescription," +
-                        "        p.ProductStock " +
-                        "FROM  dbo.Products AS p " +
-                        "WHERE p.ProductStock > 0" +
-                        " AND  p.ProductEnabled = 1";
-                    result = await db.QueryAsync<object>(query);
+                    string query =
+                        "SELECT data.ProductId," +
+                        "       data.Name," +
+                        "       data.Popularity " +
+                        "FROM (" +
+                        "SELECT  p.ProductId, " +
+                        "        MAX(p.ProductDescription) AS Name, " +
+                        "        COUNT(pl.ProductId) AS Popularity " +
+                        "FROM    [dbo].[Products] AS p " +
+                        "LEFT JOIN [dbo].[ProductsLikes] AS pl" +
+                        "    ON p.ProductId = pl.ProductId " +
+                        "WHERE   p.ProductEnabled = 1 " +
+                        "    AND p.ProductStock > 0 " +
+                        " GROUP BY p.ProductId ) AS data" +
+                        " ORDER BY " + (Filters.ContainsKey("sort") ? Filters["sort"] : sort);
+
+                    //Applying pagination to query
+                    if (Filters.ContainsKey("skip") && Filters.ContainsKey("take"))
+                    {
+                        query += " OFFSET @skip ROWS " +
+                                 " FETCH NEXT @take ROWS ONLY ";
+
+                        parameters.Add("@skip", int.Parse(Filters["skip"]));
+                        parameters.Add("@take", int.Parse(Filters["take"]));
+                    }
+
+                    result = await db.QueryAsync<object>(query, parameters);
                 };
                 return result;
             }
