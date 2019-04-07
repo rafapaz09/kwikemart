@@ -34,16 +34,46 @@ namespace Kwikemart_API.Services
                 using (IDbConnection db = con)
                 {
                     string query = 
-                        "SELECT  ProductId," +
-                        "        ProductDescription," +
-                        "        ProductState " +
-                        "FROM  dbo.Products " +
-                        "WHERE ProductState = 1";
-                    result = await db.QueryAsync<ProductsDto>(query);
+                        "SELECT  p.ProductId," +
+                        "        p.ProductDescription," +
+                        "        p.ProductStock " +
+                        "FROM  dbo.Products AS p " +
+                        "WHERE p.ProductStock > 0" +
+                        " AND  p.ProductEnabled = 1";
+                    result = await db.QueryAsync<object>(query);
                 };
                 return result;
             }
             catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task SetProductAsync(object Product, string action)
+        {
+            try
+            {
+                string query = string.Empty;
+                using (IDbConnection db = con)
+                {
+                    if (action.Equals("I"))
+                    {
+                        query = @"INSERT INTO [dbo].[Products]([ProductDescription], [ProductEnabled],[ProductCreationUser],[ProductStock]) " +
+                                  "VALUES (@ProductDescription, @ProductEnabled,@ProductCreationUser,@ProductStock)";
+                    }
+                    else
+                    {
+                        query = @"UPDATE [dbo].[Products] " +
+                                 " SET  [ProductDescription] = ISNULL(@ProductDescription,ProductDescription) ," +
+                                 "      [ProductEnabled] = @ProductEnabled," +
+                                 "      [ProductStock] = @ProductStock " +
+                                 " WHERE [ProductId] = @ProductId ";
+                    }
+                    var result = await db.ExecuteAsync(query, Product);
+                }
+            }
+            catch(Exception ex)
             {
                 throw new Exception(ex.Message);
             }

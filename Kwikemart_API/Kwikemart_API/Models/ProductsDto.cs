@@ -8,8 +8,9 @@ namespace Kwikemart_API.Models
 {
     public class ProductsDto
     {
-        public string ProductId { get; set; }
         public string ProductDescription { get; set; }
-        public bool ProductState { get; set; }
+        public bool   ProductEnabled { get; set; }
+        public string ProductCreationUser { get; set; }
+        public int ProductStock { get; set; }
     }
 }

@@ -14,10 +14,15 @@ namespace Kwikemart_API.Services
         //Get All the available Products
         Task<object> GetProductsAsync();
 
+        //Modifying a product or adding new one
+        Task SetProductAsync(object Product, string action);
+
         //Set Price to a product
         Task SetProductPriceAsync(object ProductPrice);
 
         //Set a like to a product
         Task SetProductLikeAsync(object ProductLike);
+
+
     }
 }
