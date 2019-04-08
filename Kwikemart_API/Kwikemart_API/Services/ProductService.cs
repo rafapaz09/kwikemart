@@ -74,6 +74,38 @@ namespace Kwikemart_API.Services
             }
         }
 
+        public async Task<object> GetProductAsync(string name)
+        {
+            try
+            {
+                object result = null;
+                var parameters = new DynamicParameters();
+                using (IDbConnection db = con)
+                {
+                    string query =
+                        "SELECT  p.ProductId, " +
+                        "        MAX(p.ProductDescription) AS Name, " +
+                        "        COUNT(pl.ProductId) AS Popularity " +
+                        "FROM    [dbo].[Products] AS p " +
+                        "LEFT JOIN [dbo].[ProductsLikes] AS pl" +
+                        "    ON p.ProductId = pl.ProductId " +
+                        "WHERE   p.ProductEnabled = 1 " +
+                        "    AND p.ProductStock > 0 " +
+                        "    AND p.ProductDescription = @Name" +
+                        " GROUP BY p.ProductId ";
+
+                    parameters.Add("@Name", name);
+
+                    result = await db.QuerySingleOrDefaultAsync<object>(query, parameters);
+                }
+                return result;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task SetProductAsync(object Product, string action)
         {
             try

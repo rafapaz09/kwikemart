@@ -46,6 +46,20 @@ namespace Kwikemart_API.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpGet("{name}")]
+        public async Task<ActionResult> Get(string name)
+        {
+            try
+            {
+                return Ok(await _productService.GetProductAsync(name));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         /// <summary>
         /// Creating new product data. Only by the admin
         /// </summary>

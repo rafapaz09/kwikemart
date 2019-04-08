@@ -14,6 +14,9 @@ namespace Kwikemart_API.Services
         //Get All the available Products
         Task<object> GetProductsAsync(Dictionary<string, string> Filters);
 
+        //Get Product By Name
+        Task<object> GetProductAsync(string name);
+
         //Modifying a product or adding new one
         Task SetProductAsync(object Product, string action);
 
