@@ -5,28 +5,29 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Kwikemart_API.Models;
 using Kwikemart_API.Services;
-using Newtonsoft.Json;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Kwikemart_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
         public IProductService _productService { get; }
 
-        public ProductsController()
+        public ProductsController(IProductService productService)
         {
-            _productService = new ProductService();
+            _productService = productService;
         }
 
-        //NO AUTHORIZE ALL PUBLIC
         /// <summary>
         /// Get a list of all active products on the store
         /// </summary>
         /// <returns>
         /// </returns>
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult>Get()
         {
@@ -46,10 +47,11 @@ namespace Kwikemart_API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Creating new product data. Only by the admin
         /// </summary>
         /// <param name="products"></param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult>Post([FromBody] ProductsDto products)
         {
@@ -65,11 +67,12 @@ namespace Kwikemart_API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Updating data from an existing product. Only by the admin
         /// </summary>
         /// <param name="productId"></param>
         /// <param name="products"></param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpPut("{ProductId}")]
         public async Task<ActionResult> Put(int ProductId, [FromBody] ProductsDto products)
         {
@@ -90,13 +93,13 @@ namespace Kwikemart_API.Controllers
             }
         }
 
-        //AUTHORIZE ONLY ADMIN
         /// <summary>
-        /// Set a new price for a product
+        /// Set a new price for a product. Only by the admins
         /// </summary>
         /// <param name="ProductId"></param>
         /// <param name="prices"></param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpPut("{ProductId}/Prices")]
         public async Task<ActionResult> Prices(int ProductId, [FromBody] PricesDto prices)
         {
@@ -122,6 +125,7 @@ namespace Kwikemart_API.Controllers
         /// <param name="ProductId"></param>
         /// <param name="user"></param>
         /// <returns></returns>
+        [Authorize(Roles = "User")]
         [HttpPut("{ProductId}/Likes/{user}")]
         public async Task<ActionResult> Likes(int ProductId,string user)
         {
