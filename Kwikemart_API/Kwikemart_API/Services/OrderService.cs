@@ -6,6 +6,8 @@ using System.Data;
 using Kwikemart_API.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Options;
+using Kwikemart_API.Helpers;
 
 namespace Kwikemart_API.Services
 {
@@ -13,12 +15,14 @@ namespace Kwikemart_API.Services
     {
 
         public SqlConnection con { get; set; }
+        private AppSettings _settings;
 
-        public OrderService()
+        public OrderService(IOptions<AppSettings> settings)
         {
             try
             {
-                con = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=Kwikemart;Integrated Security=true");
+                _settings = settings.Value;
+                con = new SqlConnection(_settings.Database);
             }
             catch (Exception ex)
             {
@@ -75,18 +79,6 @@ namespace Kwikemart_API.Services
                 throw new Exception(ex.Message);
             }
         }
-
-        //public Task<object> GetOrderByUserAsync(string user)
-        //{
-        //    try
-        //    {
-
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
 
     }
 }

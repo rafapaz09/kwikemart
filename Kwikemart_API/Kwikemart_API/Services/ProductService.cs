@@ -4,6 +4,8 @@ using Dapper;
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
+using Microsoft.Extensions.Options;
+using Kwikemart_API.Helpers;
 
 namespace Kwikemart_API.Services
 {
@@ -12,12 +14,14 @@ namespace Kwikemart_API.Services
 
         public SqlConnection con { get; set; }
         public string sort { get; set; }
+        private AppSettings _settings;
 
-        public ProductService()
+        public ProductService(IOptions<AppSettings> settings)
         {
             try
             {
-                con = new SqlConnection("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=Kwikemart;Integrated Security=true");
+                _settings = settings.Value;
+                con = new SqlConnection(_settings.Database);
                 sort = "Name ASC";
             }
             catch (Exception ex)
