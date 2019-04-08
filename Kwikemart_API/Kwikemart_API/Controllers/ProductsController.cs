@@ -67,7 +67,7 @@ namespace Kwikemart_API.Controllers
         /// <returns></returns>
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<ActionResult>Post([FromBody] ProductsDto products)
+        public async Task<ActionResult>Post([FromBody] List<ProductsDto> products)
         {
             try
             {
