@@ -1,0 +1,396 @@
+{
+	"info": {
+		"_postman_id": "d7a691c0-eb9e-4468-a83a-cb61f45e898b",
+		"name": "KwikEMart_API",
+		"description": "Collections for testing KwikEMart API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Login_Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"apu\",\r\n  \"password\": \"apu2019*\"\r\n}"
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Account",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Account"
+							]
+						},
+						"description": "Login functionality with admin credentials"
+					},
+					"response": []
+				},
+				{
+					"name": "Login_User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"user\",\r\n  \"password\": \"user2019*\"\r\n}"
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Account",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Account"
+							]
+						},
+						"description": "Login with user credentials"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Products",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Products"
+							]
+						},
+						"description": "Listing all available products"
+					},
+					"response": []
+				},
+				{
+					"name": "Products With Filters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Products?sort=Popularity DESC&skip=5&take=5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Products"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "Popularity DESC"
+								},
+								{
+									"key": "skip",
+									"value": "5"
+								},
+								{
+									"key": "take",
+									"value": "5"
+								}
+							]
+						},
+						"description": "Searching products with sort filters"
+					},
+					"response": []
+				},
+				{
+					"name": "New Product Price",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"productPrice\": 9.35,\r\n  \"priceCreationUser\": \"rjpazs\"\r\n}"
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Products/:ProductId/Prices",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Products",
+								":ProductId",
+								"Prices"
+							],
+							"variable": [
+								{
+									"key": "ProductId",
+									"value": "14"
+								}
+							]
+						},
+						"description": "Adding new price to a product"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\r\n  \"productDescription\": \"Donuts\",\r\n  \"productEnabled\": true,\r\n  \"productCreationUser\": \"rjpazs\",\r\n  \"productStock\": 55\r\n},\r\n{\r\n  \"productDescription\": \"Duff Beers\",\r\n  \"productEnabled\": true,\r\n  \"productCreationUser\": \"rjpazs\",\r\n  \"productStock\": 75\r\n}\r\n]"
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Products",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Products"
+							]
+						},
+						"description": "Creating an Array of Products"
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"productDescription\": \"string\",\r\n  \"productEnabled\": true,\r\n  \"productStock\": 0\r\n}"
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Products/:ProductId",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Products",
+								":ProductId"
+							],
+							"variable": [
+								{
+									"key": "ProductId",
+									"value": "11"
+								}
+							]
+						},
+						"description": "Disable o enable a product, an altering their stock value"
+					},
+					"response": []
+				},
+				{
+					"name": "New Product Like",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXIiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU1NDcwMTQ3NiwiZXhwIjoxNTU0NzMwMjc2LCJpYXQiOjE1NTQ3MDE0NzZ9.pMVSCSF2e-rkuFDDlRIyJ4iBbGVzxVAQd6r7apswvKI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Products/:ProductId/Likes/:user",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Products",
+								":ProductId",
+								"Likes",
+								":user"
+							],
+							"variable": [
+								{
+									"key": "ProductId",
+									"value": "11"
+								},
+								{
+									"key": "user",
+									"value": "rjpazs"
+								}
+							]
+						},
+						"description": "Adding new price to a product"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Orders",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"orderUser\": \"rjpazs\",\r\n  \"orderDetails\": [\r\n    {\r\n      \"productId\": 1,\r\n      \"quantity\": 6\r\n    },\r\n    {\r\n      \"productId\": 3,\r\n      \"quantity\": 25\r\n    },\r\n    {\r\n      \"productId\": 4,\r\n      \"quantity\": 10\r\n    }\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Orders",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Orders"
+							]
+						},
+						"description": "Buying an array of products"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
