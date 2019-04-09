@@ -30,3 +30,7 @@ C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_APP\Kwikemart_APP\obj\Debug\net
 C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_APP\Kwikemart_APP\obj\Debug\netcoreapp2.1\Kwikemart_APP.dll
 C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_APP\Kwikemart_APP\obj\Debug\netcoreapp2.1\Kwikemart_APP.pdb
 C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_APP\Kwikemart_APP\obj\Debug\netcoreapp2.1\Kwikemart_APP.csproj.CopyComplete
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_APP\Kwikemart_APP\obj\Debug\netcoreapp2.1\Razor\Views\Home\ProductListDetail.g.cshtml.cs
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_APP\Kwikemart_APP\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_APP\Kwikemart_APP\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_WaitLoad.g.cshtml.cs
+C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_APP\Kwikemart_APP\obj\Debug\netcoreapp2.1\Razor\Views\Products\Index.g.cshtml.cs

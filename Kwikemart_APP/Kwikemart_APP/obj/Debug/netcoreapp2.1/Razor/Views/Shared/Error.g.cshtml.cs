@@ -23,8 +23,13 @@ using Kwikemart_APP.Models;
 
 #line default
 #line hidden
+#line 3 "C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_APP\Kwikemart_APP\Views\_ViewImports.cshtml"
+using Kwikemart_APP.Helpers;
+
+#line default
+#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"583387379a597938339285f5a623245873b0a91c", @"/Views/Shared/Error.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"68eb458be6e93c65dc4622e0ca646101e9061ab0", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bd107f690c375df8a0850b4600e012af564f9ca1", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Error : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ErrorViewModel>
     {
         #pragma warning disable 1998

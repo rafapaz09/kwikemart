@@ -23,8 +23,13 @@ using Kwikemart_APP.Models;
 
 #line default
 #line hidden
+#line 3 "C:\Users\rjpazs\source\repos\kwikemart\Kwikemart_APP\Kwikemart_APP\Views\_ViewImports.cshtml"
+using Kwikemart_APP.Helpers;
+
+#line default
+#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e57a9cdbfb174b0e3def22c244c908ddaaf89fa7", @"/Views/Home/Privacy.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"68eb458be6e93c65dc4622e0ca646101e9061ab0", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bd107f690c375df8a0850b4600e012af564f9ca1", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Privacy : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
