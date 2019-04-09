@@ -8,7 +8,7 @@ namespace Kwikemart_APP.Models
     public class ProductsData
     {
         public string Name { get; set; }
-        public double Price { get; set; }
+        public double ProductPrice { get; set; }
         public int Popularity { get; set; }
     }
 }

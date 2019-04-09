@@ -105,7 +105,7 @@ namespace Kwikemart_APP.Controllers
                     {
                         List<object> itemList = new List<object>();
                         itemList.Add(p.Name);
-                        itemList.Add(p.Price);
+                        itemList.Add(p.ProductPrice);
                         itemList.Add(p.Popularity);
                         list.Add(itemList);
                     }

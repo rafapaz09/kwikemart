@@ -42,7 +42,7 @@ namespace Kwikemart_API.Controllers
             }
             catch(Exception ex)
             {
-                throw new Exception(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -52,11 +52,14 @@ namespace Kwikemart_API.Controllers
         {
             try
             {
-                return Ok(await _productService.GetProductAsync(name));
+                return Ok(await _productService.GetProductsAsync(new Dictionary<string, string>()
+                {
+                    {"search", name }
+                }));
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -78,7 +81,7 @@ namespace Kwikemart_API.Controllers
             }
             catch(Exception ex)
             {
-                throw new Exception(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -135,7 +138,7 @@ namespace Kwikemart_API.Controllers
             }
             catch(Exception ex)
             {
-                throw new Exception(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -162,7 +165,7 @@ namespace Kwikemart_API.Controllers
             }
             catch(Exception ex)
             {
-                throw new Exception(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 

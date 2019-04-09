@@ -42,18 +42,39 @@ namespace Kwikemart_API.Services
                     string query =
                         "SELECT data.ProductId," +
                         "       data.Name," +
-                        "       data.Popularity " +
+                        "       data.Popularity ," +
+                        "       pr.ProductPrice " +
                         "FROM (" +
                         "SELECT  p.ProductId, " +
                         "        MAX(p.ProductDescription) AS Name, " +
-                        "        COUNT(pl.ProductId) AS Popularity " +
+                        "        COUNT(pl.ProductId) AS Popularity," +
+                        "        MAX(pr.PriceCreationDate) AS PriceCreation " +
                         "FROM    [dbo].[Products] AS p " +
                         "LEFT JOIN [dbo].[ProductsLikes] AS pl" +
                         "    ON p.ProductId = pl.ProductId " +
+                        "LEFT JOIN [dbo].[ProductsPrices] AS pr " +
+                        "   ON p.ProductId = pr.ProductId " +
                         "WHERE   p.ProductEnabled = 1 " +
                         "    AND p.ProductStock > 0 " +
                         " GROUP BY p.ProductId ) AS data" +
-                        " ORDER BY " + (Filters.ContainsKey("sort") ? Filters["sort"] : sort);
+                        " LEFT JOIN[dbo].[ProductsPrices] AS pr " +
+                        " ON[data].PriceCreation = pr.PriceCreationDate ";
+
+                    //Get the total number of rows
+                    string queryRows = "" +
+                        "SELECT COUNT(p.ProductId) " +
+                        "FROM   [dbo].[Products] AS p " +
+                        "WHERE  p.ProductEnabled = 1" +
+                        "   AND p.ProductStock > 0 ";
+
+                    if (Filters.ContainsKey("search"))
+                    {
+                        query += " WHERE UPPER(data.Name) LIKE UPPER(@Name) ";
+                        queryRows += " AND UPPER(p.ProductDescription) LIKE UPPER(@Name) ";
+                        parameters.Add("@Name", "%" + Filters["search"] + "%");
+                    }
+
+                    query += " ORDER BY " + (Filters.ContainsKey("sort") ? Filters["sort"] : sort);
 
                     //Applying pagination to query
                     if (Filters.ContainsKey("skip") && Filters.ContainsKey("take"))
@@ -65,13 +86,7 @@ namespace Kwikemart_API.Services
                         parameters.Add("@take", int.Parse(Filters["take"]));
                     }
 
-                    //Get the total number of rows
-                    string queryRows = "" +
-                        "SELECT COUNT(p.ProductId) " +
-                        "FROM   [dbo].[Products] AS p " +
-                        "WHERE  p.ProductEnabled = 1" +
-                        "   AND p.ProductStock > 0";
-                    var count = await db.QuerySingleAsync<int>(queryRows);
+                    var count = await db.QuerySingleAsync<int>(queryRows, parameters);
 
                     result = await db.QueryAsync<object>(query, parameters);
                     return new Dictionary<string, object>()
@@ -104,7 +119,7 @@ namespace Kwikemart_API.Services
                         "    ON p.ProductId = pl.ProductId " +
                         "WHERE   p.ProductEnabled = 1 " +
                         "    AND p.ProductStock > 0 " +
-                        "    AND UPPER(p.ProductDescription) LIKE '%UPPER(@Name)%" +
+                        "    AND UPPER(p.ProductDescription) LIKE '%UPPER(@Name)%'" +
                         " GROUP BY p.ProductId ";
 
                     parameters.Add("@Name", name);
