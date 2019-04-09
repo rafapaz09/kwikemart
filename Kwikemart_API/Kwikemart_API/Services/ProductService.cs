@@ -35,6 +35,7 @@ namespace Kwikemart_API.Services
             try
             {
                 object result = null;
+                
                 var parameters = new DynamicParameters();
                 using (IDbConnection db = con)
                 {
@@ -64,9 +65,21 @@ namespace Kwikemart_API.Services
                         parameters.Add("@take", int.Parse(Filters["take"]));
                     }
 
+                    //Get the total number of rows
+                    string queryRows = "" +
+                        "SELECT COUNT(p.ProductId) " +
+                        "FROM   [dbo].[Products] AS p " +
+                        "WHERE  p.ProductEnabled = 1" +
+                        "   AND p.ProductStock > 0";
+                    var count = await db.QuerySingleAsync<int>(queryRows);
+
                     result = await db.QueryAsync<object>(query, parameters);
+                    return new Dictionary<string, object>()
+                    {
+                        {"TotalRows",count.ToString() },
+                        {"Data",result }
+                    };
                 };
-                return result;
             }
             catch (Exception ex)
             {
@@ -91,7 +104,7 @@ namespace Kwikemart_API.Services
                         "    ON p.ProductId = pl.ProductId " +
                         "WHERE   p.ProductEnabled = 1 " +
                         "    AND p.ProductStock > 0 " +
-                        "    AND p.ProductDescription = @Name" +
+                        "    AND UPPER(p.ProductDescription) LIKE '%UPPER(@Name)%" +
                         " GROUP BY p.ProductId ";
 
                     parameters.Add("@Name", name);

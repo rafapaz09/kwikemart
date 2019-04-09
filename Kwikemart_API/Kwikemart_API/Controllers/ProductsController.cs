@@ -25,8 +25,8 @@ namespace Kwikemart_API.Controllers
         /// <summary>
         /// Get a list of all active products on the store
         /// </summary>
-        /// <returns>
-        /// </returns>
+        /// <response code="200">Products Returned Correctly</response>
+        /// <response code="400">Products Not Returned</response>
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult>Get()
@@ -64,7 +64,9 @@ namespace Kwikemart_API.Controllers
         /// Creating new product data. Only by the admin
         /// </summary>
         /// <param name="products"></param>
-        /// <returns></returns>
+        /// <response code="200">Products Inserted Correctly</response>
+        /// <response code="400">Products Not Inserted</response>
+        /// <response code="401">Unauthorized to perfom this action</response>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult>Post([FromBody] List<ProductsDto> products)
@@ -85,7 +87,9 @@ namespace Kwikemart_API.Controllers
         /// </summary>
         /// <param name="productId"></param>
         /// <param name="products"></param>
-        /// <returns></returns>
+        /// <response code="200">Product Modified Correctly</response>
+        /// <response code="400">Error, Product Not Modified</response>
+        /// <response code="401">Unauthorized to perfom this action</response>
         [Authorize(Roles = "Admin")]
         [HttpPut("{ProductId}")]
         public async Task<ActionResult> Put(int ProductId, [FromBody] ProductsDto products)
@@ -112,7 +116,9 @@ namespace Kwikemart_API.Controllers
         /// </summary>
         /// <param name="ProductId"></param>
         /// <param name="prices"></param>
-        /// <returns></returns>
+        /// <response code="200">Price of the Product Inserted Correctly</response>
+        /// <response code="400">Error, Price not Inserted</response>
+        /// <response code="401">Unauthorized to perfom this action</response>
         [Authorize(Roles = "Admin")]
         [HttpPut("{ProductId}/Prices")]
         public async Task<ActionResult> Prices(int ProductId, [FromBody] PricesDto prices)
@@ -138,7 +144,9 @@ namespace Kwikemart_API.Controllers
         /// </summary>
         /// <param name="ProductId"></param>
         /// <param name="user"></param>
-        /// <returns></returns>
+        /// <response code="200">Like of the Product Inserted Correctly</response>
+        /// <response code="400">Error, Product Like not inserted</response>
+        /// <response code="401">Unauthorized to perfom this action</response>
         [Authorize(Roles = "User")]
         [HttpPut("{ProductId}/Likes/{user}")]
         public async Task<ActionResult> Likes(int ProductId,string user)
