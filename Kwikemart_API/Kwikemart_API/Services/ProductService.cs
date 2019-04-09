@@ -173,6 +173,14 @@ namespace Kwikemart_API.Services
                     var result = await db.ExecuteAsync(insertQuery, ProductPrice);
                 };
             }
+            catch(SqlException sqex)
+            {
+                switch(sqex.Number)
+                {
+                    case 547:    throw new Exception("The Product doesn´t exists");
+                    default:     throw new Exception("An error ocurred on the database");
+                }
+            }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -188,6 +196,14 @@ namespace Kwikemart_API.Services
                     string insertQuery = @"INSERT INTO [dbo].[ProductsLikes]([ProductId], [User]) VALUES (@ProductId, @User)";
                     var result = await db.ExecuteAsync(insertQuery, ProductLike);
                 };
+            }
+            catch(SqlException sqex)
+            {
+                switch(sqex.Number)
+                {
+                    case 547:   throw new Exception("The Product doesn't exists");
+                    default:    throw new Exception("An error ocurred on the database");
+                }
             }
             catch (Exception ex)
             {

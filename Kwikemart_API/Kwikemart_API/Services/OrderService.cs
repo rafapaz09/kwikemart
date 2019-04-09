@@ -65,10 +65,10 @@ namespace Kwikemart_API.Services
             }
             catch(SqlException sqex)
             {
-                if(sqex.Number >= 50000)
-                {
+                if(sqex.Number == 547)
+                    throw new Exception("The product doesn´t exists");
+                if (sqex.Number >= 50000)
                     throw new Exception(sqex.Message);
-                }
                 else
                 {
                     throw new Exception("An error ocurred on the database");
