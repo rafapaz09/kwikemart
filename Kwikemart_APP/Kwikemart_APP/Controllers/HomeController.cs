@@ -75,18 +75,20 @@ namespace Kwikemart_APP.Controllers
                     int skip = start != null ? int.Parse(start) : 0;
                     int take = length != null ? int.Parse(length) : 10; //Default value = 10
                     
-                    var datProductsDt = new List<Products>();
+                    var datProductsDt = new Products();
                     _json = _api.Get("Products", new Dictionary<string, string>()
                     {
                         {"skip",skip.ToString() },
                         {"take",take.ToString() }
                     });
 
-                    datProductsDt = JsonConvert.DeserializeObject<List<Products>>(_json);
-                    List<object> list = new List<object>();
-                    string json2 = JsonConvert.SerializeObject(datProductsDt);
+                    datProductsDt = JsonConvert.DeserializeObject<Products>(_json);
 
-                    foreach(Products p in datProductsDt)
+                    int totalRows = datProductsDt.TotalRows;
+
+                    List<object> list = new List<object>();
+
+                    foreach(ProductsData p in datProductsDt.Data)
                     {
                         List<object> itemList = new List<object>();
                         itemList.Add(p.Name);
@@ -95,7 +97,7 @@ namespace Kwikemart_APP.Controllers
                         list.Add(itemList);
                     }
 
-                    return Json(new { draw = draw, recordsFiltered = 15, recordsTotal =15 , data = list });
+                    return Json(new { draw = draw, recordsFiltered = totalRows, recordsTotal = totalRows, data = list });
                 }
                 else
                 {

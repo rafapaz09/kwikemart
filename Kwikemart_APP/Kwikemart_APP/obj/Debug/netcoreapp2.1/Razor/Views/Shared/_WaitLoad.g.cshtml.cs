@@ -61,7 +61,7 @@ using Kwikemart_APP.Helpers;
             WriteLiteral("<div id=\"wait_load\" class=\"wait_load\" style=\"position: fixed; top: 35vh; right: 0; bottom: 0; left: 0; z-index: 2040;  display: block;\">\r\n    <div class=\"sk-fading-circle\">\r\n        ");
             EndContext();
             BeginContext(182, 69, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0fe63e4afb334aa79c19a7fe783f1184", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "ac8fc78255fa42f79902dff061fb24b0", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
