@@ -71,16 +71,29 @@ namespace Kwikemart_APP.Controllers
                     var start = Request.Form["start"].ToString();
                     var length = Request.Form["length"].ToString();
                     var draw = HttpContext.Request.Form["draw"].ToString();
+                    var searchValue = Request.Form["search[value]"].ToString();
 
                     int skip = start != null ? int.Parse(start) : 0;
                     int take = length != null ? int.Parse(length) : 10; //Default value = 10
                     
                     var datProductsDt = new Products();
-                    _json = _api.Get("Products", new Dictionary<string, string>()
+
+                    //Searching by name
+                    if (!(string.IsNullOrEmpty(searchValue)))
                     {
-                        {"skip",skip.ToString() },
-                        {"take",take.ToString() }
-                    });
+                        _json = _api.Get("Products", new Dictionary<string, string>()
+                        {
+                            {"search",searchValue.ToString()}
+                        });
+                    }
+                    else
+                    {
+                        _json = _api.Get("Products", new Dictionary<string, string>()
+                        {
+                            {"skip",skip.ToString() },
+                            {"take",take.ToString() }
+                        });
+                    }
 
                     datProductsDt = JsonConvert.DeserializeObject<Products>(_json);
 

@@ -67,7 +67,7 @@ using Kwikemart_APP.Helpers;
             WriteLiteral("\r\n<div class=\"row\">\r\n    <div class=\"row\">\r\n        <div class=\"col-sm-5 offset-sm-6\">\r\n            ");
             EndContext();
             BeginContext(145, 57, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f1f181eaf3b14c7ca9a117a85abb93ab", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f3607d4769244c99aac46d06108eab31", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
